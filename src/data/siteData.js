@@ -5,7 +5,7 @@ export const templates = [
     category: "Bodas",
     image:
       "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600",
-    demoUrl: "#",
+    demoUrl: "../../public/muestras/bodas/boda001/boda-jardin-de-noche.html",
   },
   {
     id: 2,
@@ -29,7 +29,8 @@ export const templates = [
     category: "XV Años",
     image:
       "https://images.unsplash.com/photo-1550005809-91ad75fb315f?auto=format&fit=crop&q=80&w=600",
-    demoUrl: "#",
+    demoUrl:
+      "../../public/muestras/xvAños/xvaños001/xv-anos-noche-de-papel-y-luz.html",
   },
   {
     id: 5,

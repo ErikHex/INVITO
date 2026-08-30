@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Baby Shower de Sofía</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Quicksand:wght@400;500;600&family=Caveat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================
+     PERSONALIZAR AQUÍ — datos del cliente
+     Busca los textos marcados con "» CAMBIAR"
+     ===================================================== */
+      :root {
+        --cream: #fffbf2;
+        --mint: #aedfc9;
+        --blush: #f6c9cc;
+        --butter: #f7d774;
+        --sky: #aedff7;
+        --text: #4a4038;
+        --text-soft: rgba(74, 64, 56, 0.68);
+        --line: rgba(74, 64, 56, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--cream);
+        color: var(--text);
+        font-family: "Quicksand", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: var(--butter);
+      }
+
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+      section {
+        padding: 56px 28px;
+        position: relative;
+      }
+
+      /* ---------- NUBES DECORATIVAS ---------- */
+      .cloud {
+        position: absolute;
+        background: #fff;
+        border-radius: 50px;
+        opacity: 0.9;
+        filter: drop-shadow(0 4px 10px rgba(74, 64, 56, 0.06));
+        animation: drift 7s ease-in-out infinite alternate;
+      }
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+      }
+      @keyframes drift {
+        0% {
+          transform: translateX(0) translateY(0);
+        }
+        100% {
+          transform: translateX(10px) translateY(-8px);
+        }
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            55% 40% at 20% 10%,
+            rgba(174, 223, 247, 0.5),
+            transparent 70%
+          ),
+          radial-gradient(
+            50% 35% at 85% 15%,
+            rgba(246, 201, 204, 0.5),
+            transparent 70%
+          ),
+          var(--cream);
+      }
+      .rainbow {
+        width: 150px;
+        height: 75px;
+        margin-bottom: 6px;
+      }
+      .rainbow path {
+        fill: none;
+        stroke-width: 7;
+        stroke-linecap: round;
+      }
+
+      /* ---------- FOTO ---------- */
+      .photo-frame {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        padding: 8px;
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(74, 64, 56, 0.12);
+        margin: 14px 0 22px;
+        position: relative;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+      }
+      .tape {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-4deg);
+        width: 70px;
+        height: 26px;
+        background: var(--butter);
+        opacity: 0.85;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      }
+
+      .eyebrow {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #e0879a;
+        margin-bottom: 6px;
+      }
+      .name {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        font-size: clamp(42px, 12vw, 58px);
+        color: var(--text);
+        line-height: 1.05;
+      }
+      .caveat {
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        color: #7aa78f;
+        margin-top: 4px;
+      }
+      .date-line {
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: var(--text-soft);
+        margin-top: 16px;
+        font-weight: 500;
+      }
+      .scroll-cue {
+        margin-top: 42px;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.45;
+      }
+
+      /* ---------- MENSAJE ---------- */
+      .story {
+        text-align: center;
+      }
+      .story .divider {
+        width: 44px;
+        height: 3px;
+        background: var(--mint);
+        border-radius: 2px;
+        margin: 0 auto 22px;
+      }
+      .story p {
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--text);
+      }
+
+      /* ---------- GALERÍA ---------- */
+      .gallery {
+        background: #fff;
+        text-align: center;
+      }
+      .section-title {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 600;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #e0879a;
+        margin-bottom: 26px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 18px;
+      }
+      .gallery-grid .wide {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/10;
+      }
+
+      /* ---------- DETALLES ---------- */
+      .details {
+        text-align: center;
+      }
+      .card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 26px 22px;
+        margin-bottom: 16px;
+        box-shadow: 0 6px 18px rgba(74, 64, 56, 0.06);
+      }
+      .card .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .card h3 {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 600;
+        font-size: 19px;
+        margin-bottom: 6px;
+      }
+      .card p {
+        font-size: 15px;
+        color: var(--text-soft);
+        line-height: 1.5;
+      }
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #e0879a;
+        text-decoration: none;
+        border-bottom: 2px solid var(--blush);
+        padding-bottom: 2px;
+      }
+
+      /* ---------- CUENTA REGRESIVA ---------- */
+      .countdown {
+        text-align: center;
+        background: #fff;
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .cd-item {
+        min-width: 64px;
+        background: var(--cream);
+        border-radius: 16px;
+        padding: 14px 6px;
+      }
+      .cd-num {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        color: #e0879a;
+      }
+      .cd-label {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin-top: 2px;
+      }
+
+      /* ---------- MESA DE REGALOS ---------- */
+      .registry {
+        text-align: center;
+      }
+      .registry p {
+        font-size: 15px;
+        color: var(--text-soft);
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+
+      /* ---------- RSVP ---------- */
+      .rsvp {
+        text-align: center;
+        background: #fff;
+      }
+      .rsvp p {
+        font-size: 15px;
+        color: var(--text-soft);
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 15px 38px;
+        background: linear-gradient(120deg, #f6c9cc, #f7d774);
+        color: var(--text);
+        text-decoration: none;
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 30px;
+        box-shadow: 0 8px 20px rgba(246, 201, 204, 0.45);
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 28px 60px;
+      }
+      footer .mono {
+        font-family: "Caveat", cursive;
+        font-size: 26px;
+        color: #e0879a;
+      }
+      footer .small {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        opacity: 0.45;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <div
+          class="cloud"
+          style="width: 90px; height: 34px; top: 12%; left: 8%"
+        ></div>
+        <div
+          class="cloud"
+          style="
+            width: 70px;
+            height: 28px;
+            top: 22%;
+            right: 10%;
+            animation-delay: 1.2s;
+          "
+        ></div>
+        <div
+          class="cloud"
+          style="
+            width: 60px;
+            height: 24px;
+            bottom: 14%;
+            left: 14%;
+            animation-delay: 2.4s;
+          "
+        ></div>
+
+        <svg
+          class="rainbow"
+          viewBox="0 0 150 75"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10,75 A65,65 0 0 1 140,75"
+            stroke="#f6c9cc"
+          />
+          <path
+            d="M22,75 A53,53 0 0 1 128,75"
+            stroke="#f7d774"
+          />
+          <path
+            d="M34,75 A41,41 0 0 1 116,75"
+            stroke="#aedff7"
+          />
+        </svg>
+
+        <!-- » CAMBIAR: reemplaza el src por la foto real del bebé / mamá (ej. "fotos/bebe.jpg") -->
+        <div class="photo-frame">
+          <div class="tape"></div>
+          <img
+            src="fotos-baby-shower/Ultrasonido Foto 180443766.webp"
+            alt="Baby shower de Sofía"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="eyebrow">¡Está por llegar!</div>
+        <!-- » CAMBIAR: nombre -->
+        <div class="name">Sofía</div>
+        <div class="caveat">baby shower</div>
+        <!-- » CAMBIAR: fecha -->
+        <div class="date-line">Sábado 17 de Octubre · 2026</div>
+        <div class="scroll-cue">Desliza ↓</div>
+      </section>
+
+      <section class="story">
+        <div class="divider"></div>
+        <!-- » CAMBIAR: frase de invitación -->
+        <p>
+          Muy pronto conoceremos a la personita más esperada de la familia.
+          Acompáñanos a celebrar su llegada con juegos, cariño y muchos buenos
+          deseos.
+        </p>
+      </section>
+
+      <section class="gallery">
+        <div class="section-title">Momentos</div>
+        <!-- » CAMBIAR: reemplaza cada src por fotos reales -->
+        <div class="gallery-grid">
+          <img
+            class="wide"
+            src="fotos-baby-shower/Ultrasonido Foto de Zoe Galarza.webp"
+            alt="Foto 1"
+            loading="lazy"
+          />
+          <img
+            src="fotos-baby-shower/Ultrasonido Pexels.webp"
+            alt="Foto 2"
+            loading="lazy"
+          />
+          <img
+            src="fotos-baby-shower/pexels-luisbecerrafotografo-5769114.webp"
+            alt="Foto 3"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <section class="details">
+        <div class="section-title">Detalles</div>
+
+        <div class="card">
+          <div
+            class="icon"
+            style="background: var(--sky)"
+          >
+            🕒
+          </div>
+          <h3>Fecha y hora</h3>
+          <!-- » CAMBIAR: fecha y hora -->
+          <p>17 de Octubre, 2026<br />1:00 pm</p>
+        </div>
+
+        <div class="card">
+          <div
+            class="icon"
+            style="background: var(--mint)"
+          >
+            📍
+          </div>
+          <h3>Lugar</h3>
+          <!-- » CAMBIAR: lugar -->
+          <p>Casa de la familia Reyes<br />Av. Los Encinos 245, Puebla</p>
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            rel="noopener"
+            >Ver mapa</a
+          >
+        </div>
+      </section>
+
+      <section class="countdown">
+        <div class="section-title">Faltan</div>
+        <div class="cd-grid">
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-days"
+            >
+              00
+            </div>
+            <div class="cd-label">Días</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-hours"
+            >
+              00
+            </div>
+            <div class="cd-label">Hrs</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-mins"
+            >
+              00
+            </div>
+            <div class="cd-label">Min</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-secs"
+            >
+              00
+            </div>
+            <div class="cd-label">Seg</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="registry">
+        <div class="section-title">Mesa de regalos</div>
+        <!-- » CAMBIAR: texto y enlace de mesa de regalos -->
+        <p>
+          Tu presencia es nuestro mejor regalo. Si deseas obsequiarnos algo,
+          tenemos mesa de regalos en Liverpool y Amazon.
+        </p>
+        <a
+          href="#"
+          style="
+            color: #e0879a;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid var(--blush);
+          "
+          >Ver mesa de regalos</a
+        >
+      </section>
+
+      <section class="rsvp">
+        <div class="section-title">Confirmación</div>
+        <p>Confirma tu asistencia antes del 10 de octubre</p>
+        <!-- » CAMBIAR: número de WhatsApp -->
+        <a
+          class="btn"
+          href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20baby%20shower%20de%20Sofía"
+          target="_blank"
+          rel="noopener"
+          >Confirmar asistencia</a
+        >
+      </section>
+
+      <footer>
+        <div class="mono">con amor, familia Reyes</div>
+        <div class="small">17 · 10 · 2026</div>
+      </footer>
+    </div>
+
+    <script>
+      const target = new Date("2026-10-17T13:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("cd-days").textContent = String(d).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-hours").textContent = String(h).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-mins").textContent = String(m).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-secs").textContent = String(s).padStart(
+          2,
+          "0",
+        );
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

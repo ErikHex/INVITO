@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>25 Años — Ana & Luis</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================
+     PERSONALIZAR AQUÍ — datos del cliente
+     Busca los textos marcados con "» CAMBIAR"
+     ===================================================== */
+      :root {
+        --onyx: #14110f;
+        --onyx-2: #1e1a16;
+        --gold: #d4af37;
+        --gold-soft: #e9d8a6;
+        --wine: #4b1521;
+        --cream: #f3ecdd;
+        --line: rgba(233, 216, 166, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--onyx);
+        color: var(--cream);
+        font-family: "Montserrat", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: var(--gold);
+        color: var(--onyx);
+      }
+
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+      section {
+        padding: 60px 28px;
+        position: relative;
+      }
+
+      /* ---------- MARCO ART-DECÓ ---------- */
+      .deco-corner {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--gold);
+        opacity: 0.55;
+      }
+      .deco-corner.tl {
+        top: 22px;
+        left: 22px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .deco-corner.tr {
+        top: 22px;
+        right: 22px;
+        border-left: none;
+        border-bottom: none;
+      }
+      .deco-corner.bl {
+        bottom: 22px;
+        left: 22px;
+        border-right: none;
+        border-top: none;
+      }
+      .deco-corner.br {
+        bottom: 22px;
+        right: 22px;
+        border-left: none;
+        border-top: none;
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            60% 45% at 50% 30%,
+            rgba(212, 175, 55, 0.1),
+            transparent 70%
+          ),
+          var(--onyx);
+      }
+
+      .years {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        font-size: clamp(90px, 28vw, 130px);
+        line-height: 0.85;
+        background: linear-gradient(
+          100deg,
+          var(--gold-soft) 20%,
+          var(--gold) 40%,
+          #fff6da 50%,
+          var(--gold) 60%,
+          var(--gold-soft) 80%
+        );
+        background-size: 230% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 5s linear infinite;
+      }
+      @keyframes shimmer {
+        to {
+          background-position: 220% center;
+        }
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        margin-top: 6px;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+
+      /* ---------- FOTO ---------- */
+      .photo-frame {
+        width: 340px;
+        height: 340px;
+        padding: 8px;
+        margin-bottom: 22px;
+        position: relative;
+      }
+      .photo-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--gold);
+        transform: rotate(45deg);
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        border: 2px solid var(--onyx-2);
+        position: relative;
+        z-index: 1;
+      }
+
+      .names {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(24px, 7vw, 30px);
+        color: var(--cream);
+        margin-top: 6px;
+      }
+      .date-line {
+        font-size: 12.5px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold-soft);
+        margin-top: 16px;
+        opacity: 0.85;
+      }
+      .scroll-cue {
+        margin-top: 44px;
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        opacity: 0.4;
+      }
+
+      /* ---------- MENSAJE ---------- */
+      .story {
+        text-align: center;
+      }
+      .story .divider {
+        width: 1px;
+        height: 36px;
+        background: var(--gold);
+        margin: 0 auto 22px;
+        opacity: 0.5;
+      }
+      .story p {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 18px;
+        line-height: 1.7;
+        color: var(--gold-soft);
+      }
+
+      /* ---------- GALERÍA ---------- */
+      .gallery {
+        background: var(--onyx-2);
+        text-align: center;
+      }
+      .section-title {
+        font-size: 11px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 28px;
+        font-weight: 500;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        filter: saturate(0.9) contrast(1.05);
+      }
+      .gallery-grid .wide {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/10;
+      }
+
+      /* ---------- DETALLES ---------- */
+      .details {
+        text-align: center;
+      }
+      .card {
+        background: var(--onyx-2);
+        border: 1px solid var(--line);
+        padding: 26px 22px;
+        margin-bottom: 16px;
+      }
+      .card svg {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 10px;
+        stroke: var(--gold);
+        fill: none;
+      }
+      .card h3 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        font-size: 19px;
+        margin-bottom: 6px;
+        color: var(--cream);
+      }
+      .card p {
+        font-size: 14.5px;
+        color: var(--gold-soft);
+        opacity: 0.85;
+        line-height: 1.6;
+      }
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 2px;
+      }
+
+      /* ---------- CUENTA REGRESIVA ---------- */
+      .countdown {
+        text-align: center;
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 8px;
+      }
+      .cd-item {
+        min-width: 60px;
+      }
+      .cd-num {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        font-size: 30px;
+        color: var(--gold);
+      }
+      .cd-label {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.55;
+        margin-top: 2px;
+      }
+
+      /* ---------- CÓDIGO DE VESTIMENTA ---------- */
+      .dresscode {
+        text-align: center;
+        background: var(--onyx-2);
+      }
+      .dresscode p {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        color: var(--gold-soft);
+      }
+      .palette {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .swatch {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+      }
+
+      /* ---------- RSVP ---------- */
+      .rsvp {
+        text-align: center;
+      }
+      .rsvp p {
+        font-size: 14.5px;
+        color: var(--gold-soft);
+        opacity: 0.85;
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: var(--gold);
+        color: var(--onyx);
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      footer {
+        text-align: center;
+        padding: 44px 28px 60px;
+      }
+      footer .mono {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 24px;
+        color: var(--gold);
+      }
+      footer .small {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        opacity: 0.4;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <div class="deco-corner tl"></div>
+        <div class="deco-corner tr"></div>
+        <div class="deco-corner bl"></div>
+        <div class="deco-corner br"></div>
+
+        <!-- » CAMBIAR: número de años -->
+        <div class="years">50</div>
+        <br />
+        <div class="eyebrow">Años de historia juntos</div>
+
+        <!-- » CAMBIAR: reemplaza el src por la foto real de la pareja (ej. "fotos/pareja.jpg") -->
+        <div class="photo-frame">
+          <img
+            src="fotos-aniversario/Pareja Mayor Foto 5784939.webp"
+            alt="Ana y Luis"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- » CAMBIAR: nombres -->
+        <div class="names">Ana &amp; Luis</div>
+        <!-- » CAMBIAR: fecha -->
+        <div class="date-line">Sábado 21 de Noviembre · 2026</div>
+        <div class="scroll-cue">Desliza ↓</div>
+      </section>
+
+      <section class="story">
+        <div class="divider"></div>
+        <!-- » CAMBIAR: frase de invitación -->
+        <p>
+          "Medio siglo de amor juntos merece una noche a la altura." Los
+          invitamos a celebrar con nosotros esta noche llena de gratitud,
+          brindis y buenos recuerdos.
+        </p>
+      </section>
+
+      <section class="gallery">
+        <div class="section-title">Nuestra historia</div>
+        <!-- » CAMBIAR: reemplaza cada src por fotos reales -->
+        <div class="gallery-grid">
+          <img
+            class="wide"
+            src="fotos-aniversario/Pareja Mayor Foto 5784938.webp"
+            alt="Foto 1"
+            loading="lazy"
+          />
+          <img
+            src="fotos-aniversario/Pareja Mayor Foto 5784947.webp"
+            alt="Foto 2"
+            loading="lazy"
+          />
+          <img
+            src="fotos-aniversario/Pareja Mayor Foto.webp"
+            alt="Foto 3"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <section class="details">
+        <div class="section-title">Detalles</div>
+
+        <div class="card">
+          <svg viewBox="0 0 32 32">
+            <path d="M6 26 L26 26 M9 26 V14 L16 6 L23 14 V26" />
+          </svg>
+          <h3>La celebración</h3>
+          <!-- » CAMBIAR: hora y lugar -->
+          <p>8:00 pm · Salón Terraza Imperial<br />Ciudad de México</p>
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            rel="noopener"
+            >Ver mapa</a
+          >
+        </div>
+      </section>
+
+      <section class="countdown">
+        <div class="section-title">Faltan</div>
+        <div class="cd-grid">
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-days"
+            >
+              00
+            </div>
+            <div class="cd-label">Días</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-hours"
+            >
+              00
+            </div>
+            <div class="cd-label">Hrs</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-mins"
+            >
+              00
+            </div>
+            <div class="cd-label">Min</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-secs"
+            >
+              00
+            </div>
+            <div class="cd-label">Seg</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dresscode">
+        <div class="section-title">Código de vestimenta</div>
+        <p>Etiqueta rigurosa</p>
+        <div class="palette">
+          <div
+            class="swatch"
+            style="background: #14110f"
+          ></div>
+          <div
+            class="swatch"
+            style="background: #d4af37"
+          ></div>
+          <div
+            class="swatch"
+            style="background: #4b1521"
+          ></div>
+          <div
+            class="swatch"
+            style="background: #e9d8a6"
+          ></div>
+        </div>
+      </section>
+
+      <section class="rsvp">
+        <div class="section-title">Confirmación</div>
+        <p>Confirma tu asistencia antes del 5 de noviembre</p>
+        <!-- » CAMBIAR: número de WhatsApp -->
+        <a
+          class="btn"
+          href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20aniversario%20de%20Ana%20y%20Luis"
+          target="_blank"
+          rel="noopener"
+          >Confirmar asistencia</a
+        >
+      </section>
+
+      <footer>
+        <div class="mono">Ana &amp; Luis</div>
+        <div class="small">21 · 11 · 2026</div>
+      </footer>
+    </div>
+
+    <script>
+      const target = new Date("2026-11-21T20:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("cd-days").textContent = String(d).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-hours").textContent = String(h).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-mins").textContent = String(m).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-secs").textContent = String(s).padStart(
+          2,
+          "0",
+        );
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

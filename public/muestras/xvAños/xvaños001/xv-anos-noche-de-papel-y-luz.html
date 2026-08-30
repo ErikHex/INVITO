@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Camila — Mis XV años</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================
+     PERSONALIZAR AQUÍ — datos de la quinceañera
+     Busca los textos marcados con "» CAMBIAR"
+     ===================================================== */
+      :root {
+        --noche: #241534; /* fondo, cielo de noche */
+        --noche-2: #331f47;
+        --magenta: #e63d77;
+        --coral: #ff8c5a;
+        --oro: #f2c14e;
+        --crema: #fff7ef;
+        --linea: rgba(255, 247, 239, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--noche);
+        color: var(--crema);
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--magenta);
+        color: var(--crema);
+      }
+
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      /* ---------- BANDEROLA DE PAPEL PICADO ---------- */
+      .picado {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4px;
+        position: relative;
+        height: 54px;
+        overflow: visible;
+      }
+      .flag {
+        width: 11%;
+        height: 40px;
+        background: var(--magenta);
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        transform-origin: top center;
+        animation: sway 3.2s ease-in-out infinite;
+      }
+      .flag:nth-child(2n) {
+        background: var(--coral);
+        animation-delay: 0.3s;
+      }
+      .flag:nth-child(3n) {
+        background: var(--oro);
+        animation-delay: 0.6s;
+      }
+      .flag:nth-child(4n) {
+        background: var(--magenta);
+        animation-delay: 0.9s;
+      }
+      @keyframes sway {
+        0%,
+        100% {
+          transform: rotate(-3deg);
+        }
+        50% {
+          transform: rotate(3deg);
+        }
+      }
+
+      section {
+        padding: 56px 28px;
+        position: relative;
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        min-height: 92svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            60% 45% at 50% 18%,
+            rgba(230, 61, 119, 0.28),
+            transparent 70%
+          ),
+          radial-gradient(
+            50% 40% at 80% 75%,
+            rgba(242, 193, 78, 0.14),
+            transparent 70%
+          ),
+          var(--noche);
+      }
+      .stars {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .stars span {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: var(--crema);
+        border-radius: 50%;
+        opacity: 0.55;
+        animation: twinkle 2.6s ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.15;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      /* ---------- FOTO PRINCIPAL ---------- */
+      .photo-frame {
+        width: 280px;
+        height: 320px;
+        border-radius: 14px;
+        padding: 6px;
+        background: linear-gradient(135deg, var(--magenta), var(--oro));
+        margin-bottom: 22px;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+      }
+
+      /* ---------- GALERÍA ---------- */
+      .gallery {
+        text-align: center;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid var(--linea);
+      }
+      .gallery-grid .wide {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/10;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--oro);
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+      .xv {
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        font-size: clamp(96px, 32vw, 150px);
+        line-height: 0.85;
+        color: var(--crema);
+        -webkit-text-stroke: 1.5px var(--oro);
+        position: relative;
+        margin-bottom: 6px;
+      }
+      .name {
+        font-family: "Pacifico", cursive;
+        font-size: clamp(34px, 10vw, 46px);
+        color: var(--magenta);
+        margin-top: 4px;
+        text-shadow: 0 0 22px rgba(230, 61, 119, 0.45);
+      }
+      .date-line {
+        margin-top: 18px;
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
+      .scroll-cue {
+        margin-top: 44px;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        opacity: 0.5;
+      }
+
+      /* ---------- MENSAJE ---------- */
+      .story {
+        text-align: center;
+        background: var(--noche-2);
+      }
+      .story p {
+        font-size: 16px;
+        line-height: 1.7;
+        opacity: 0.9;
+        max-width: 340px;
+        margin: 0 auto;
+      }
+      .story .divider {
+        width: 46px;
+        height: 2px;
+        background: var(--oro);
+        margin: 0 auto 22px;
+        border-radius: 2px;
+      }
+
+      /* ---------- DETALLES ---------- */
+      .section-title {
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--oro);
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+      .card {
+        background: linear-gradient(
+          160deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid var(--linea);
+        border-radius: 14px;
+        padding: 24px 20px;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .card svg {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+      }
+      .card svg path,
+      .card svg circle {
+        stroke: var(--oro);
+        fill: none;
+        stroke-width: 1.4;
+      }
+      .card h3 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 6px;
+        color: var(--crema);
+      }
+      .card p {
+        font-size: 14.5px;
+        opacity: 0.75;
+        line-height: 1.5;
+      }
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--magenta);
+        text-decoration: none;
+        border-bottom: 1px solid var(--magenta);
+        padding-bottom: 2px;
+      }
+
+      /* ---------- CUENTA REGRESIVA ---------- */
+      .countdown {
+        text-align: center;
+        background: var(--noche-2);
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .cd-item {
+        min-width: 64px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        padding: 14px 6px;
+        border: 1px solid var(--linea);
+      }
+      .cd-num {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 28px;
+        color: var(--magenta);
+      }
+      .cd-label {
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin-top: 2px;
+      }
+
+      /* ---------- PADRINOS / CORTEJO opcional ---------- */
+      .cortejo {
+        text-align: center;
+      }
+      .cortejo p {
+        font-size: 15px;
+        opacity: 0.85;
+        margin-bottom: 4px;
+      }
+      .cortejo .rol {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--oro);
+        margin-top: 20px;
+        margin-bottom: 6px;
+      }
+
+      /* ---------- RSVP ---------- */
+      .rsvp {
+        text-align: center;
+        background: var(--noche-2);
+      }
+      .rsvp p {
+        font-size: 15px;
+        opacity: 0.85;
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: linear-gradient(120deg, var(--magenta), var(--coral));
+        color: var(--crema);
+        text-decoration: none;
+        font-size: 12.5px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border-radius: 30px;
+        font-weight: 600;
+        box-shadow: 0 8px 24px rgba(230, 61, 119, 0.35);
+      }
+
+      footer {
+        text-align: center;
+        padding: 44px 28px 60px;
+      }
+      footer .mono {
+        font-family: "Pacifico", cursive;
+        font-size: 24px;
+        color: var(--oro);
+      }
+      footer .small {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        opacity: 0.5;
+        margin-top: 8px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- BANDEROLA -->
+      <div class="picado">
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+        <div class="flag"></div>
+      </div>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div
+          class="stars"
+          id="stars"
+        ></div>
+        <!-- » CAMBIAR: reemplaza el src por la foto real de la quinceañera (ej. "fotos/camila.jpg") -->
+        <div class="photo-frame">
+          <img
+            src="fotos-xv/Xv Años Morado Foto.webp"
+            alt="Camila"
+            loading="lazy"
+          />
+        </div>
+        <div class="eyebrow">Mis quince años</div>
+        <div class="xv">XV</div>
+        <!-- » CAMBIAR: nombre -->
+        <div class="name">Camila</div>
+        <!-- » CAMBIAR: fecha -->
+        <div class="date-line">Sábado 6 de Marzo · 2027</div>
+        <div class="scroll-cue">Desliza ↓</div>
+      </section>
+
+      <!-- MENSAJE -->
+      <section class="story">
+        <div class="divider"></div>
+        <!-- » CAMBIAR: frase de invitación -->
+        <p>
+          Hoy cierro un capítulo de niña y abro uno nuevo lleno de sueños.
+          Quiero compartir esta noche mágica contigo, acompañándome a celebrar
+          mis quince años.
+        </p>
+      </section>
+
+      <!-- GALERÍA -->
+      <section class="gallery">
+        <div class="section-title">Momentos</div>
+        <!-- » CAMBIAR: reemplaza cada src por fotos reales de la quinceañera -->
+        <div class="gallery-grid">
+          <img
+            class="wide"
+            src="fotos-xv/Xv Años Morado Foto.webp"
+            alt="Foto 1"
+            loading="lazy"
+          />
+          <img
+            src="fotos-xv/Xv Años Morado Foto (1).webp"
+            alt="Foto 2"
+            loading="lazy"
+          />
+          <img
+            src="fotos-xv/pexels-eduardo-barrientos-140939364-27815943.webp"
+            alt="Foto 3"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- DETALLES -->
+      <section class="details">
+        <div class="section-title">Detalles del evento</div>
+
+        <div class="card">
+          <svg viewBox="0 0 32 32">
+            <path d="M16 4 L16 28 M8 10 L24 10" />
+            <circle
+              cx="16"
+              cy="16"
+              r="12"
+            />
+          </svg>
+          <h3>Misa</h3>
+          <!-- » CAMBIAR: hora y lugar -->
+          <p>4:00 pm · Parroquia del Carmen<br />Ciudad de México</p>
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            rel="noopener"
+            >Ver mapa</a
+          >
+        </div>
+
+        <div class="card">
+          <svg viewBox="0 0 32 32">
+            <path d="M6 26 L26 26 M9 26 V14 L16 6 L23 14 V26" />
+          </svg>
+          <h3>Fiesta</h3>
+          <!-- » CAMBIAR: hora y lugar -->
+          <p>7:00 pm · Salón Jardín Real<br />Ciudad de México</p>
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            rel="noopener"
+            >Ver mapa</a
+          >
+        </div>
+      </section>
+
+      <!-- CUENTA REGRESIVA -->
+      <section class="countdown">
+        <div class="section-title">Faltan</div>
+        <div class="cd-grid">
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-days"
+            >
+              00
+            </div>
+            <div class="cd-label">Días</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-hours"
+            >
+              00
+            </div>
+            <div class="cd-label">Hrs</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-mins"
+            >
+              00
+            </div>
+            <div class="cd-label">Min</div>
+          </div>
+          <div class="cd-item">
+            <div
+              class="cd-num"
+              id="cd-secs"
+            >
+              00
+            </div>
+            <div class="cd-label">Seg</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORTEJO (opcional, borrar si no aplica) -->
+      <section class="cortejo">
+        <div class="section-title">Mis padrinos</div>
+        <div class="rol">Padrinos de honor</div>
+        <!-- » CAMBIAR: nombres -->
+        <p>Laura Hernández &amp; Diego Ramírez</p>
+        <div class="rol">Damas de honor</div>
+        <p>Sofía · Regina · Ximena · Andrea</p>
+      </section>
+
+      <!-- RSVP -->
+      <section class="rsvp">
+        <div class="section-title">Confirmación</div>
+        <p>Confirma tu asistencia antes del 20 de febrero</p>
+        <!-- » CAMBIAR: número de WhatsApp en formato internacional sin signos -->
+        <a
+          class="btn"
+          href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Camila"
+          target="_blank"
+          rel="noopener"
+          >Confirmar asistencia</a
+        >
+      </section>
+
+      <footer>
+        <div class="mono">Camila</div>
+        <div class="small">06 · 03 · 2027</div>
+      </footer>
+    </div>
+
+    <script>
+      // --- Estrellas decorativas ---
+      const starsContainer = document.getElementById("stars");
+      for (let i = 0; i < 28; i++) {
+        const s = document.createElement("span");
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 80 + "%";
+        s.style.animationDelay = Math.random() * 2.6 + "s";
+        starsContainer.appendChild(s);
+      }
+
+      // --- Cuenta regresiva --- » CAMBIAR: fecha y hora objetivo
+      const target = new Date("2027-03-06T16:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("cd-days").textContent = String(d).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-hours").textContent = String(h).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-mins").textContent = String(m).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-secs").textContent = String(s).padStart(
+          2,
+          "0",
+        );
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>
