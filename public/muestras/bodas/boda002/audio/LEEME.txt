@@ -1,0 +1,14 @@
+Coloca aquí tu archivo de música (formato .mp3 recomendado) y actualiza
+la ruta en src/config.js -> music.src
+
+Ejemplo:
+  public/audio/nuestra-cancion.mp3
+  → music.src = '/audio/nuestra-cancion.mp3'
+
+Recomendaciones:
+- Usa un archivo comprimido (128–192 kbps) para que cargue rápido.
+- Asegúrate de tener los derechos de uso de la canción.
+- Si usas Spotify/Apple Music, no puedes enlazar el audio directo por
+  restricciones de esas plataformas: necesitas un archivo de audio propio
+  o un servicio que lo permita (p. ej. tu propia grabación o música libre
+  de derechos).

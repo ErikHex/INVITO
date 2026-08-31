@@ -9,11 +9,11 @@ export const templates = [
   },
   {
     id: 2,
-    title: "Fiesta Neón",
+    title: "Boda Romántica",
     category: "Cumpleaños",
     image:
-      "https://images.unsplash.com/photo-1530103862676-de3c9da59fc7?auto=format&fit=crop&q=80&w=600",
-    demoUrl: "#",
+      "https://res.cloudinary.com/tnxqwvsy/image/upload/v1788215193/Pareja_Foto_Jonathan_Borba_1.webp",
+    demoUrl: "/muestras/bodas/boda002/index.html",
   },
   {
     id: 3,
@@ -21,7 +21,8 @@ export const templates = [
     category: "Baby Shower",
     image:
       "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=600",
-    demoUrl: "#",
+    demoUrl:
+      "/muestras/babyShower/babyshower001/baby-shower-nube-de-ternura.html",
   },
   {
     id: 4,
