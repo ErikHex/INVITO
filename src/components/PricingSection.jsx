@@ -27,13 +27,13 @@ export default function PricingSection() {
               Ideal para eventos pequeños
             </p>
             <div className="mb-6">
-              <span className="text-4xl font-bold">$499</span>
+              <span className="text-4xl font-bold">$299</span>
               <span className="text-gray-400"> MXN</span>
             </div>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-rose-500 mr-3 shrink-0" />{" "}
-                <span className="text-gray-300">Diseño predefinido</span>
+                <span className="text-gray-300">Diseño Basico</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-rose-500 mr-3 shrink-0" />{" "}
@@ -41,18 +41,24 @@ export default function PricingSection() {
               </li>
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-rose-500 mr-3 shrink-0" />{" "}
-                <span className="text-gray-300">Ubicación (1 sede)</span>
+                <span className="text-gray-300">Ubicación (2 sede)</span>
               </li>
               <li className="flex items-start">
-                <X className="w-5 h-5 text-gray-600 mr-3 shrink-0" />{" "}
-                <span className="text-gray-500 line-through">
-                  Confirmación RSVP
+                <CheckCircle2 className="w-5 h-5 text-rose-500 mr-3 shrink-0" />{" "}
+                <span className="text-gray-300 ">
+                  Confirmación via Whatsapp
                 </span>
               </li>
             </ul>
-            <button className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-full font-semibold transition-colors">
+            <a
+              href="https://www.instagram.com/invito.fun/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Elegir paquete Básico y contactar a Invito por Instagram"
+              className="block w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-full font-semibold text-center transition-colors"
+            >
               Elegir Básico
-            </button>
+            </a>
           </div>
 
           <div className="bg-gradient-to-b from-rose-600 to-rose-800 rounded-3xl p-8 transform md:-translate-y-4 shadow-2xl shadow-rose-900/50 border border-rose-500 relative">
@@ -62,13 +68,13 @@ export default function PricingSection() {
             <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
             <p className="text-rose-200 mb-6 text-sm">Todo lo que necesitas</p>
             <div className="mb-6">
-              <span className="text-4xl font-bold text-white">$899</span>
+              <span className="text-4xl font-bold text-white">$599</span>
               <span className="text-rose-200"> MXN</span>
             </div>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-white mr-3 shrink-0" />{" "}
-                <span className="text-white">Todo lo del plan básico</span>
+                <span className="text-white">Diseño personalizado</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-white mr-3 shrink-0" />{" "}
@@ -89,9 +95,15 @@ export default function PricingSection() {
                 <span className="text-white">Sugerencia de regalos</span>
               </li>
             </ul>
-            <button className="w-full bg-white text-rose-700 hover:bg-gray-100 py-3 rounded-full font-bold transition-colors shadow-lg">
+            <a
+              href="https://www.instagram.com/invito.fun/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Elegir paquete Premium y contactar a Invito por Instagram"
+              className="block w-full bg-white text-rose-700 hover:bg-gray-100 py-3 rounded-full font-bold text-center transition-colors shadow-lg"
+            >
               Elegir Premium
-            </button>
+            </a>
           </div>
 
           <div className="bg-gray-800 rounded-3xl p-8 border border-gray-700 hover:border-gray-500 transition-colors">
@@ -100,7 +112,8 @@ export default function PricingSection() {
               Diseño exclusivo desde cero
             </p>
             <div className="mb-6">
-              <span className="text-4xl font-bold">$1,599</span>
+              <span className="text-gray-400 mr-2">desde</span>
+              <span className="text-4xl font-bold">$1,299</span>
               <span className="text-gray-400"> MXN</span>
             </div>
             <ul className="space-y-4 mb-8">
@@ -120,12 +133,18 @@ export default function PricingSection() {
               </li>
               <li className="flex items-start">
                 <CheckCircle2 className="w-5 h-5 text-rose-500 mr-3 shrink-0" />{" "}
-                <span className="text-gray-300">Soporte prioritario</span>
+                <span className="text-gray-300">Boletos QR </span>
               </li>
             </ul>
-            <button className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-full font-semibold transition-colors">
-              Contactar Ventas
-            </button>
+            <a
+              href="https://www.instagram.com/invito.fun/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Elegir paquete A Medida y contactar a Invito por Instagram"
+              className="block w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-full font-semibold text-center transition-colors"
+            >
+              Elegir A Medida
+            </a>
           </div>
         </div>
       </div>

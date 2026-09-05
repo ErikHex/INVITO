@@ -1,13 +1,13 @@
 const steps = [
   {
     step: "1",
-    title: "Elige un Diseño",
-    desc: "Explora nuestra galería y selecciona la plantilla que mejor se adapte a la temática de tu evento.",
+    title: "Elige el tipo de invitación",
+    desc: "Explora nuestra galería y elige el tipo de invitacion que más se adapte a tu evento y estilo. Tenemos opciones para bodas, cumpleaños, XV años y más.",
   },
   {
     step: "2",
-    title: "Personaliza los Datos",
-    desc: "Añade los nombres, fecha, lugar, fotos, música y toda la información importante.",
+    title: "Envianos los detalles de tu evento",
+    desc: "Añade los nombres, fecha, lugar, fotos, música y toda la información importante. Nuestro equipo se encargará de crear tu invitación digital personalizada.",
   },
   {
     step: "3",
@@ -28,8 +28,11 @@ export default function HowItWorks() {
             ¿Cómo crear tu invitación?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Tener una invitación espectacular para tu evento toma menos de 5
-            minutos. Es tan fácil como 1, 2, 3.
+            Olvídate de plantillas complicadas o de armar diseños por ti mismo.
+            En Invito creamos tu invitación digital completamente a medida y
+            desde cero. Lo único que tienes que hacer es enviarnos los datos de
+            tu evento y nuestro equipo se encarga de desarrollar una experiencia
+            única para sorprender a tus invitados.
           </p>
         </div>
 

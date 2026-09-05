@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Ana & Julián — Nos casamos</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #111111;
+        --white: #fafafa;
+        --gray: #8a8a8a;
+        --terra: #b5533c;
+        --line: rgba(17, 17, 17, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--white);
+        color: var(--black);
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--terra);
+        color: #fff;
+      }
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+      section {
+        padding: 60px 30px;
+        position: relative;
+      }
+
+      #envelope-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: var(--white);
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+      #envelope-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .envelope {
+        width: 210px;
+        height: 150px;
+        position: relative;
+        cursor: pointer;
+      }
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        border: 1px solid var(--black);
+      }
+      .envelope-flap {
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(0 0, 50% 55%, 100% 0);
+        background: #f0f0f0;
+        border-bottom: 1px solid var(--black);
+      }
+      .seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        transform: translate(-50%, -45%);
+        background: var(--black);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+      }
+      .tap-hint {
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gray);
+      }
+
+      #content {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+      }
+      #content.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .rule {
+        width: 1px;
+        height: 40px;
+        background: var(--black);
+        margin-bottom: 18px;
+      }
+
+      .photo-frame {
+        width: 172px;
+        height: 216px;
+        padding: 0;
+        margin-bottom: 24px;
+        border: 1px solid var(--black);
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(0.15);
+      }
+
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--gray);
+        margin-bottom: 16px;
+      }
+      .names {
+        font-family: "Bodoni Moda", serif;
+        font-weight: 500;
+        font-size: clamp(32px, 9vw, 42px);
+        letter-spacing: 0.01em;
+      }
+      .names .amp {
+        font-style: italic;
+        font-weight: 500;
+        color: var(--terra);
+      }
+      .date-line {
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gray);
+        margin-top: 18px;
+      }
+      .scroll-cue {
+        margin-top: 44px;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gray);
+      }
+
+      .story {
+        text-align: center;
+      }
+      .story p {
+        font-size: 16px;
+        line-height: 1.75;
+        color: #3a3a3a;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .gallery {
+        background: #f4f4f4;
+        text-align: center;
+      }
+      .section-title {
+        font-size: 10px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gray);
+        margin-bottom: 28px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        margin-top: 8px;
+        background: var(--black);
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(0.1);
+      }
+      .gallery-grid .wide {
+        grid-column: 1/-1;
+        aspect-ratio: 16/10;
+      }
+
+      .details {
+        text-align: center;
+      }
+      .card {
+        border-top: 1px solid var(--black);
+        padding: 26px 0;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .card:last-child {
+        border-bottom: 1px solid var(--black);
+      }
+      .card h3 {
+        font-family: "Bodoni Moda", serif;
+        font-weight: 500;
+        font-size: 19px;
+        margin-bottom: 6px;
+      }
+      .card p {
+        font-size: 14px;
+        color: #5a5a5a;
+        line-height: 1.55;
+      }
+      .card a {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--terra);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .countdown {
+        text-align: center;
+        background: #f4f4f4;
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        margin-top: 6px;
+      }
+      .cd-item {
+        min-width: 70px;
+        border-left: 1px solid var(--black);
+        padding: 0 6px;
+      }
+      .cd-item:last-child {
+        border-right: 1px solid var(--black);
+      }
+      .cd-num {
+        font-family: "Bodoni Moda", serif;
+        font-weight: 600;
+        font-size: 26px;
+      }
+      .cd-label {
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gray);
+        margin-top: 2px;
+      }
+
+      .dresscode {
+        text-align: center;
+      }
+      .dresscode p {
+        font-size: 15px;
+        letter-spacing: 0.05em;
+      }
+
+      .rsvp {
+        text-align: center;
+        background: #f4f4f4;
+      }
+      .rsvp p {
+        font-size: 14px;
+        color: #5a5a5a;
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: var(--black);
+        color: #fff;
+        text-decoration: none;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        text-align: center;
+        padding: 44px 30px 60px;
+      }
+      footer .mono {
+        font-family: "Bodoni Moda", serif;
+        font-size: 20px;
+        letter-spacing: 0.05em;
+      }
+      footer .small {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--gray);
+        margin-top: 8px;
+      }
+
+      .music-btn {
+        position: fixed;
+        bottom: 22px;
+        right: 18px;
+        z-index: 60;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid var(--black);
+        cursor: pointer;
+        background: var(--white);
+        color: var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .music-btn .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 14px;
+      }
+      .music-btn .bars span {
+        width: 3px;
+        background: var(--black);
+        border-radius: 2px;
+        height: 5px;
+      }
+      .music-btn.playing .bars span {
+        animation: eq 0.9s ease-in-out infinite;
+      }
+      .music-btn.playing .bars span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .music-btn.playing .bars span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes eq {
+        0%,
+        100% {
+          height: 5px;
+        }
+        50% {
+          height: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="/#plantillas"
+      target="_top"
+      aria-label="Volver a ejemplos"
+      style="
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 100;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #241534;
+        border: 1px solid rgba(36, 21, 52, 0.2);
+        border-radius: 999px;
+        font: 600 12px sans-serif;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      "
+      >← Ejemplos</a
+    >
+    <div id="envelope-overlay">
+      <div
+        class="envelope"
+        id="envelope"
+      >
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+        <div class="seal">A · J</div>
+      </div>
+      <div class="tap-hint">Toca para abrir</div>
+    </div>
+
+    <div class="wrap">
+      <main id="content">
+        <section class="hero">
+          <div class="rule"></div>
+          <!-- » CAMBIAR: foto real -->
+          <div class="photo-frame">
+            <img
+              src="https://picsum.photos/seed/boda-lineas-hero/400/500"
+              alt="Ana y Julián"
+              loading="lazy"
+            />
+          </div>
+          <div class="eyebrow">Nos casamos</div>
+          <div class="names">Ana <span class="amp">&amp;</span> Julián</div>
+          <!-- » CAMBIAR: fecha -->
+          <div class="date-line">14 · Agosto · 2027</div>
+          <div class="scroll-cue">Desliza ↓</div>
+        </section>
+
+        <section class="story">
+          <!-- » CAMBIAR: frase -->
+          <p>
+            Sin más adornos que la certeza de lo que sentimos. Los invitamos a
+            acompañarnos en este día.
+          </p>
+        </section>
+
+        <section class="gallery">
+          <div class="section-title">Nosotros</div>
+          <!-- » CAMBIAR: fotos reales -->
+          <div class="gallery-grid">
+            <img
+              class="wide"
+              src="https://picsum.photos/seed/boda-lineas-1/800/500"
+              alt="Foto 1"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/boda-lineas-2/400/400"
+              alt="Foto 2"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/boda-lineas-3/400/400"
+              alt="Foto 3"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <section class="details">
+          <div class="section-title">Detalles</div>
+          <div class="card">
+            <div>
+              <h3>Ceremonia</h3>
+              <!-- » CAMBIAR -->
+              <p>5:00 pm · Estudio Almenara<br />Ciudad de México</p>
+            </div>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Mapa</a
+            >
+          </div>
+          <div class="card">
+            <div>
+              <h3>Recepción</h3>
+              <!-- » CAMBIAR -->
+              <p>7:00 pm · Galería Norte<br />Ciudad de México</p>
+            </div>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Mapa</a
+            >
+          </div>
+        </section>
+
+        <section class="countdown">
+          <div class="section-title">Faltan</div>
+          <div class="cd-grid">
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-days"
+              >
+                00
+              </div>
+              <div class="cd-label">Días</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-hours"
+              >
+                00
+              </div>
+              <div class="cd-label">Hrs</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-mins"
+              >
+                00
+              </div>
+              <div class="cd-label">Min</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-secs"
+              >
+                00
+              </div>
+              <div class="cd-label">Seg</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dresscode">
+          <div class="section-title">Código de vestimenta</div>
+          <p>Formal · Blanco, negro y terracota</p>
+        </section>
+
+        <section class="rsvp">
+          <div class="section-title">Confirmación</div>
+          <p>Confirma tu asistencia antes del 20 de julio</p>
+          <!-- » CAMBIAR: WhatsApp -->
+          <a
+            class="btn"
+            href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Ana%20y%20Julián"
+            target="_blank"
+            rel="noopener"
+            >Confirmar asistencia</a
+          >
+        </section>
+
+        <footer>
+          <div class="mono">Ana &amp; Julián</div>
+          <div class="small">14 · 08 · 2027</div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- » CAMBIAR: pista real de música con licencia -->
+    <audio
+      id="bg-music"
+      loop
+      preload="none"
+    >
+      <source
+        src="musica/cancion.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <button
+      id="music-toggle"
+      class="music-btn"
+      aria-label="Reproducir música"
+    >
+      <div class="bars"><span></span><span></span><span></span></div>
+    </button>
+
+    <script>
+      const overlay = document.getElementById("envelope-overlay");
+      const content = document.getElementById("content");
+      const audio = document.getElementById("bg-music");
+      const musicBtn = document.getElementById("music-toggle");
+      audio.volume = 0.45;
+
+      function playMusic() {
+        audio
+          .play()
+          .then(() => musicBtn.classList.add("playing"))
+          .catch(() => {});
+      }
+      document.getElementById("envelope").addEventListener("click", () => {
+        overlay.classList.add("hidden");
+        content.classList.add("revealed");
+        playMusic();
+      });
+      musicBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          playMusic();
+        } else {
+          audio.pause();
+          musicBtn.classList.remove("playing");
+        }
+      });
+
+      const target = new Date("2027-08-14T17:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        document.getElementById("cd-days").textContent = String(
+          Math.floor(diff / 86400000),
+        ).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(
+          Math.floor((diff % 86400000) / 3600000),
+        ).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(
+          Math.floor((diff % 3600000) / 60000),
+        ).padStart(2, "0");
+        document.getElementById("cd-secs").textContent = String(
+          Math.floor((diff % 60000) / 1000),
+        ).padStart(2, "0");
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

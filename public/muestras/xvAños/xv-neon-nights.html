@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Dana — Neon XV</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #0b0b12;
+        --black-2: #15151f;
+        --pink: #ff2e88;
+        --cyan: #20e3ff;
+        --purple: #8b5cf6;
+        --white: #f5f5f7;
+        --line: rgba(245, 245, 247, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--black);
+        color: var(--white);
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--pink);
+        color: #fff;
+      }
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+      section {
+        padding: 58px 26px;
+        position: relative;
+      }
+
+      #envelope-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: radial-gradient(
+          120% 90% at 50% 0%,
+          #1c1c2b 0%,
+          var(--black) 70%
+        );
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+      #envelope-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .envelope {
+        width: 210px;
+        height: 150px;
+        position: relative;
+        cursor: pointer;
+      }
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        background: var(--black-2);
+        border: 1px solid var(--cyan);
+        border-radius: 6px;
+        box-shadow:
+          0 0 18px rgba(32, 227, 255, 0.35),
+          inset 0 0 18px rgba(32, 227, 255, 0.08);
+      }
+      .envelope-flap {
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(0 0, 50% 55%, 100% 0);
+        background: #1c1c2b;
+        border-bottom: 1px solid var(--pink);
+        animation: pulse 2.4s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          filter: brightness(1);
+        }
+        50% {
+          filter: brightness(1.3);
+        }
+      }
+      .seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        transform: translate(-50%, -45%);
+        background: var(--black);
+        border: 2px solid var(--pink);
+        box-shadow: 0 0 14px rgba(255, 46, 136, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--pink);
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .tap-hint {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        opacity: 0.85;
+      }
+
+      #content {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+      }
+      #content.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            55% 40% at 20% 15%,
+            rgba(255, 46, 136, 0.18),
+            transparent 70%
+          ),
+          radial-gradient(
+            50% 35% at 85% 20%,
+            rgba(32, 227, 255, 0.14),
+            transparent 70%
+          ),
+          var(--black);
+      }
+
+      .photo-frame {
+        width: 172px;
+        height: 172px;
+        padding: 5px;
+        margin-bottom: 22px;
+        background: linear-gradient(
+          135deg,
+          var(--pink),
+          var(--purple),
+          var(--cyan)
+        );
+        border-radius: 16px;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 10px;
+      }
+      .xv-neon {
+        font-family: "Monoton", cursive;
+        font-size: clamp(60px, 17vw, 84px);
+        color: var(--pink);
+        text-shadow:
+          0 0 10px var(--pink),
+          0 0 24px rgba(255, 46, 136, 0.6),
+          0 0 46px rgba(255, 46, 136, 0.35);
+      }
+      .name {
+        font-weight: 700;
+        font-size: clamp(26px, 7.5vw, 34px);
+        color: var(--white);
+        margin-top: 6px;
+        letter-spacing: 0.02em;
+      }
+      .date-line {
+        font-size: 12.5px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-top: 16px;
+        opacity: 0.9;
+      }
+      .scroll-cue {
+        margin-top: 42px;
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        opacity: 0.4;
+      }
+
+      .story {
+        text-align: center;
+      }
+      .story .divider {
+        width: 44px;
+        height: 2px;
+        background: var(--pink);
+        margin: 0 auto 22px;
+        box-shadow: 0 0 8px var(--pink);
+      }
+      .story p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #d9d9e3;
+      }
+
+      .gallery {
+        background: var(--black-2);
+        text-align: center;
+      }
+      .section-title {
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 26px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        filter: saturate(1.1);
+      }
+      .gallery-grid .wide {
+        grid-column: 1/-1;
+        aspect-ratio: 16/10;
+      }
+
+      .details {
+        text-align: center;
+      }
+      .card {
+        background: var(--black-2);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 24px 20px;
+        margin-bottom: 16px;
+      }
+      .card svg {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 10px;
+        stroke: var(--cyan);
+        fill: none;
+      }
+      .card h3 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .card p {
+        font-size: 14.5px;
+        color: #b7b7c4;
+        line-height: 1.55;
+      }
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--pink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--pink);
+        padding-bottom: 2px;
+      }
+
+      .countdown {
+        text-align: center;
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .cd-item {
+        min-width: 62px;
+        background: var(--black-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 4px;
+      }
+      .cd-num {
+        font-weight: 700;
+        font-size: 26px;
+        color: var(--cyan);
+      }
+      .cd-label {
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        opacity: 0.55;
+        margin-top: 2px;
+      }
+
+      .rsvp {
+        text-align: center;
+        background: var(--black-2);
+      }
+      .rsvp p {
+        font-size: 14.5px;
+        color: #b7b7c4;
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: linear-gradient(120deg, var(--pink), var(--purple));
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12.5px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-radius: 30px;
+        box-shadow: 0 0 22px rgba(255, 46, 136, 0.4);
+      }
+
+      footer {
+        text-align: center;
+        padding: 42px 26px 60px;
+      }
+      footer .mono {
+        font-family: "Monoton", cursive;
+        font-size: 20px;
+        color: var(--cyan);
+        text-shadow: 0 0 10px var(--cyan);
+      }
+      footer .small {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        opacity: 0.4;
+        margin-top: 10px;
+      }
+
+      .music-btn {
+        position: fixed;
+        bottom: 22px;
+        right: 18px;
+        z-index: 60;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid var(--cyan);
+        cursor: pointer;
+        background: var(--black-2);
+        color: var(--cyan);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 14px rgba(32, 227, 255, 0.3);
+      }
+      .music-btn .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 14px;
+      }
+      .music-btn .bars span {
+        width: 3px;
+        background: var(--cyan);
+        border-radius: 2px;
+        height: 5px;
+      }
+      .music-btn.playing .bars span {
+        animation: eq 0.9s ease-in-out infinite;
+      }
+      .music-btn.playing .bars span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .music-btn.playing .bars span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes eq {
+        0%,
+        100% {
+          height: 5px;
+        }
+        50% {
+          height: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="/#plantillas"
+      target="_top"
+      aria-label="Volver a ejemplos"
+      style="
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 100;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #241534;
+        border: 1px solid rgba(36, 21, 52, 0.2);
+        border-radius: 999px;
+        font: 600 12px sans-serif;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      "
+      >← Ejemplos</a
+    >
+    <div id="envelope-overlay">
+      <div
+        class="envelope"
+        id="envelope"
+      >
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+        <div class="seal">XV</div>
+      </div>
+      <div class="tap-hint">Toca para abrir</div>
+    </div>
+
+    <div class="wrap">
+      <main id="content">
+        <section class="hero">
+          <!-- » CAMBIAR: foto real (ej. "fotos/dana.jpg") -->
+          <div class="photo-frame">
+            <img
+              src="https://picsum.photos/seed/xv-neon-hero/400/400"
+              alt="Dana"
+              loading="lazy"
+            />
+          </div>
+          <div class="eyebrow">Mis quince años</div>
+          <div class="xv-neon">XV</div>
+          <!-- » CAMBIAR: nombre -->
+          <div class="name">Dana</div>
+          <!-- » CAMBIAR: fecha -->
+          <div class="date-line">Viernes 4 de Junio · 2027</div>
+          <div class="scroll-cue">Desliza ↓</div>
+        </section>
+
+        <section class="story">
+          <div class="divider"></div>
+          <!-- » CAMBIAR: frase -->
+          <p>
+            Luces, música y una noche que no vamos a olvidar. Ven a bailar
+            conmigo y celebrar que hoy cumplo 15.
+          </p>
+        </section>
+
+        <section class="gallery">
+          <div class="section-title">Vibes</div>
+          <!-- » CAMBIAR: fotos reales -->
+          <div class="gallery-grid">
+            <img
+              class="wide"
+              src="https://picsum.photos/seed/xv-neon-1/800/500"
+              alt="Foto 1"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/xv-neon-2/400/400"
+              alt="Foto 2"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/xv-neon-3/400/400"
+              alt="Foto 3"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <section class="details">
+          <div class="section-title">Detalles</div>
+          <div class="card">
+            <svg viewBox="0 0 32 32">
+              <path d="M16 4 L16 28 M8 10 L24 10" />
+              <circle
+                cx="16"
+                cy="16"
+                r="12"
+              />
+            </svg>
+            <h3>Misa</h3>
+            <!-- » CAMBIAR -->
+            <p>5:00 pm · Parroquia La Soledad<br />Monterrey, N.L.</p>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Ver mapa</a
+            >
+          </div>
+          <div class="card">
+            <svg viewBox="0 0 32 32">
+              <path d="M6 26 L26 26 M9 26 V14 L16 6 L23 14 V26" />
+            </svg>
+            <h3>Fiesta</h3>
+            <!-- » CAMBIAR -->
+            <p>8:00 pm · Loft Industrial 21<br />Monterrey, N.L.</p>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Ver mapa</a
+            >
+          </div>
+        </section>
+
+        <section class="countdown">
+          <div class="section-title">Faltan</div>
+          <div class="cd-grid">
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-days"
+              >
+                00
+              </div>
+              <div class="cd-label">Días</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-hours"
+              >
+                00
+              </div>
+              <div class="cd-label">Hrs</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-mins"
+              >
+                00
+              </div>
+              <div class="cd-label">Min</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-secs"
+              >
+                00
+              </div>
+              <div class="cd-label">Seg</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rsvp">
+          <div class="section-title">Confirmación</div>
+          <p>Confirma tu asistencia antes del 25 de mayo</p>
+          <!-- » CAMBIAR: WhatsApp -->
+          <a
+            class="btn"
+            href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Dana"
+            target="_blank"
+            rel="noopener"
+            >Confirmar asistencia</a
+          >
+        </section>
+
+        <footer>
+          <div class="mono">DANA XV</div>
+          <div class="small">04 · 06 · 2027</div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- » CAMBIAR: pista real de música con licencia -->
+    <audio
+      id="bg-music"
+      loop
+      preload="none"
+    >
+      <source
+        src="musica/cancion.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <button
+      id="music-toggle"
+      class="music-btn"
+      aria-label="Reproducir música"
+    >
+      <div class="bars"><span></span><span></span><span></span></div>
+    </button>
+
+    <script>
+      const overlay = document.getElementById("envelope-overlay");
+      const content = document.getElementById("content");
+      const audio = document.getElementById("bg-music");
+      const musicBtn = document.getElementById("music-toggle");
+      audio.volume = 0.45;
+
+      function playMusic() {
+        audio
+          .play()
+          .then(() => musicBtn.classList.add("playing"))
+          .catch(() => {});
+      }
+      document.getElementById("envelope").addEventListener("click", () => {
+        overlay.classList.add("hidden");
+        content.classList.add("revealed");
+        playMusic();
+      });
+      musicBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          playMusic();
+        } else {
+          audio.pause();
+          musicBtn.classList.remove("playing");
+        }
+      });
+
+      const target = new Date("2027-06-04T17:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        document.getElementById("cd-days").textContent = String(
+          Math.floor(diff / 86400000),
+        ).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(
+          Math.floor((diff % 86400000) / 3600000),
+        ).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(
+          Math.floor((diff % 3600000) / 60000),
+        ).padStart(2, "0");
+        document.getElementById("cd-secs").textContent = String(
+          Math.floor((diff % 60000) / 1000),
+        ).padStart(2, "0");
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Isabella — Mis XV años</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Tangerine:wght@700&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --lavender: #ede7f6;
+        --lavender-2: #f7f4fb;
+        --silver: #c9cdd6;
+        --lilac: #a98fc7;
+        --ink: #3a3550;
+        --ink-soft: rgba(58, 53, 80, 0.65);
+        --line: rgba(58, 53, 80, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--lavender-2);
+        color: var(--ink);
+        font-family: "Montserrat", sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--lilac);
+        color: #fff;
+      }
+      .wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+      }
+      section {
+        padding: 58px 28px;
+        position: relative;
+      }
+
+      #envelope-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: radial-gradient(
+          120% 90% at 50% 0%,
+          var(--lavender) 0%,
+          var(--lavender-2) 70%
+        );
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+      #envelope-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .envelope {
+        width: 210px;
+        height: 150px;
+        position: relative;
+        cursor: pointer;
+      }
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        border: 1px solid var(--silver);
+        border-radius: 2px;
+      }
+      .envelope-flap {
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(0 0, 50% 55%, 100% 0);
+        background: var(--lavender);
+        border-bottom: 1px solid var(--line);
+        animation: breathe 3.5s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          filter: brightness(1);
+        }
+        50% {
+          filter: brightness(1.05);
+        }
+      }
+      .seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        transform: translate(-50%, -45%);
+        background: radial-gradient(circle at 35% 30%, #fff, var(--silver) 75%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+      .tap-hint {
+        font-size: 11px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: 0.55;
+      }
+
+      #content {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+      }
+      #content.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            55% 40% at 50% 15%,
+            rgba(169, 143, 199, 0.14),
+            transparent 70%
+          ),
+          var(--lavender-2);
+        position: relative;
+        overflow: hidden;
+      }
+      .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--lilac);
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: twinkle 2.4s ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.15;
+        }
+        50% {
+          opacity: 0.85;
+        }
+      }
+
+      .tiara {
+        width: 64px;
+        height: 44px;
+        margin-bottom: 10px;
+      }
+      .tiara path {
+        fill: none;
+        stroke: var(--lilac);
+        stroke-width: 1.4;
+      }
+
+      .photo-frame {
+        width: 172px;
+        height: 172px;
+        border-radius: 50%;
+        padding: 6px;
+        background: linear-gradient(135deg, var(--lilac), var(--silver));
+        margin-bottom: 22px;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        border: 3px solid #fff;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--lilac);
+        margin-bottom: 12px;
+      }
+      .xv-word {
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        font-size: clamp(38px, 10.5vw, 48px);
+        letter-spacing: 0.12em;
+        color: var(--ink);
+      }
+      .name {
+        font-family: "Tangerine", cursive;
+        font-weight: 700;
+        font-size: clamp(52px, 15vw, 68px);
+        color: var(--lilac);
+        margin-top: 2px;
+      }
+      .date-line {
+        font-size: 12.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin-top: 14px;
+      }
+      .scroll-cue {
+        margin-top: 42px;
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        opacity: 0.45;
+      }
+
+      .story {
+        text-align: center;
+      }
+      .story .divider {
+        width: 36px;
+        height: 1px;
+        background: var(--lilac);
+        margin: 0 auto 22px;
+      }
+      .story p {
+        font-size: 16.5px;
+        line-height: 1.75;
+        font-style: italic;
+      }
+
+      .gallery {
+        background: var(--lavender);
+        text-align: center;
+      }
+      .section-title {
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--lilac);
+        margin-bottom: 26px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid var(--line);
+      }
+      .gallery-grid .wide {
+        grid-column: 1/-1;
+        aspect-ratio: 16/10;
+      }
+
+      .details {
+        text-align: center;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 26px 22px;
+        margin-bottom: 16px;
+        border-radius: 2px;
+      }
+      .card svg {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 10px;
+        stroke: var(--lilac);
+        fill: none;
+      }
+      .card h3 {
+        font-family: "Cinzel", serif;
+        font-weight: 500;
+        font-size: 17px;
+        margin-bottom: 6px;
+        letter-spacing: 0.04em;
+      }
+      .card p {
+        font-size: 14.5px;
+        color: var(--ink-soft);
+        line-height: 1.55;
+      }
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--lilac);
+        text-decoration: none;
+        border-bottom: 1px solid var(--lilac);
+        padding-bottom: 2px;
+      }
+
+      .countdown {
+        text-align: center;
+        background: var(--lavender);
+      }
+      .cd-grid {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 6px;
+      }
+      .cd-item {
+        min-width: 60px;
+      }
+      .cd-num {
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        font-size: 26px;
+        color: var(--lilac);
+      }
+      .cd-label {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin-top: 2px;
+      }
+
+      .rsvp {
+        text-align: center;
+      }
+      .rsvp p {
+        font-size: 15px;
+        color: var(--ink-soft);
+        margin-bottom: 22px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 15px 38px;
+        background: var(--lilac);
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-radius: 2px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 28px 60px;
+      }
+      footer .mono {
+        font-family: "Tangerine", cursive;
+        font-weight: 700;
+        font-size: 34px;
+        color: var(--lilac);
+      }
+      footer .small {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        opacity: 0.5;
+        margin-top: 4px;
+      }
+
+      .music-btn {
+        position: fixed;
+        bottom: 22px;
+        right: 18px;
+        z-index: 60;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        background: var(--lilac);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      }
+      .music-btn .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 14px;
+      }
+      .music-btn .bars span {
+        width: 3px;
+        background: #fff;
+        border-radius: 2px;
+        height: 5px;
+      }
+      .music-btn.playing .bars span {
+        animation: eq 0.9s ease-in-out infinite;
+      }
+      .music-btn.playing .bars span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .music-btn.playing .bars span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes eq {
+        0%,
+        100% {
+          height: 5px;
+        }
+        50% {
+          height: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="/#plantillas"
+      target="_top"
+      aria-label="Volver a ejemplos"
+      style="
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 100;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #241534;
+        border: 1px solid rgba(36, 21, 52, 0.2);
+        border-radius: 999px;
+        font: 600 12px sans-serif;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+      "
+      >← Ejemplos</a
+    >
+    <div id="envelope-overlay">
+      <div
+        class="envelope"
+        id="envelope"
+      >
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+        <div class="seal"></div>
+      </div>
+      <div class="tap-hint">Toca el sobre para abrir</div>
+    </div>
+
+    <div class="wrap">
+      <main id="content">
+        <section
+          class="hero"
+          id="hero-sparkles"
+        >
+          <svg
+            class="tiara"
+            viewBox="0 0 64 44"
+          >
+            <path d="M4,40 L4,24 L16,34 L32,10 L48,34 L60,24 L60,40 Z" />
+          </svg>
+          <!-- » CAMBIAR: foto real (ej. "fotos/isabella.jpg") -->
+          <div class="photo-frame">
+            <img
+              src="https://picsum.photos/seed/xv-cristal-hero/400/400"
+              alt="Isabella"
+              loading="lazy"
+            />
+          </div>
+          <div class="eyebrow">Mis quince años</div>
+          <div class="xv-word">XV</div>
+          <!-- » CAMBIAR: nombre -->
+          <div class="name">Isabella</div>
+          <!-- » CAMBIAR: fecha -->
+          <div class="date-line">Sábado 28 de Agosto · 2027</div>
+          <div class="scroll-cue">Desliza ↓</div>
+        </section>
+
+        <section class="story">
+          <div class="divider"></div>
+          <!-- » CAMBIAR: frase -->
+          <p>
+            "Como un cristal que refleja mil luces, hoy comienza un nuevo
+            capítulo." Acompáñame a celebrarlo.
+          </p>
+        </section>
+
+        <section class="gallery">
+          <div class="section-title">Momentos</div>
+          <!-- » CAMBIAR: fotos reales -->
+          <div class="gallery-grid">
+            <img
+              class="wide"
+              src="https://picsum.photos/seed/xv-cristal-1/800/500"
+              alt="Foto 1"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/xv-cristal-2/400/400"
+              alt="Foto 2"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/seed/xv-cristal-3/400/400"
+              alt="Foto 3"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <section class="details">
+          <div class="section-title">Detalles</div>
+          <div class="card">
+            <svg viewBox="0 0 32 32">
+              <path d="M16 4 L16 28 M8 10 L24 10" />
+              <circle
+                cx="16"
+                cy="16"
+                r="12"
+              />
+            </svg>
+            <h3>Misa</h3>
+            <!-- » CAMBIAR -->
+            <p>4:00 pm · Catedral Metropolitana<br />Mérida, Yuc.</p>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Ver mapa</a
+            >
+          </div>
+          <div class="card">
+            <svg viewBox="0 0 32 32">
+              <path d="M6 26 L26 26 M9 26 V14 L16 6 L23 14 V26" />
+            </svg>
+            <h3>Fiesta</h3>
+            <!-- » CAMBIAR -->
+            <p>7:30 pm · Salón Cristal<br />Mérida, Yuc.</p>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener"
+              >Ver mapa</a
+            >
+          </div>
+        </section>
+
+        <section class="countdown">
+          <div class="section-title">Faltan</div>
+          <div class="cd-grid">
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-days"
+              >
+                00
+              </div>
+              <div class="cd-label">Días</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-hours"
+              >
+                00
+              </div>
+              <div class="cd-label">Hrs</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-mins"
+              >
+                00
+              </div>
+              <div class="cd-label">Min</div>
+            </div>
+            <div class="cd-item">
+              <div
+                class="cd-num"
+                id="cd-secs"
+              >
+                00
+              </div>
+              <div class="cd-label">Seg</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rsvp">
+          <div class="section-title">Confirmación</div>
+          <p>Confirma tu asistencia antes del 15 de agosto</p>
+          <!-- » CAMBIAR: WhatsApp -->
+          <a
+            class="btn"
+            href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Isabella"
+            target="_blank"
+            rel="noopener"
+            >Confirmar asistencia</a
+          >
+        </section>
+
+        <footer>
+          <div class="mono">Isabella</div>
+          <div class="small">28 · 08 · 2027</div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- » CAMBIAR: pista real de música con licencia -->
+    <audio
+      id="bg-music"
+      loop
+      preload="none"
+    >
+      <source
+        src="musica/cancion.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <button
+      id="music-toggle"
+      class="music-btn"
+      aria-label="Reproducir música"
+    >
+      <div class="bars"><span></span><span></span><span></span></div>
+    </button>
+
+    <script>
+      const sparklesHost = document.getElementById("hero-sparkles");
+      for (let i = 0; i < 16; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 90 + "%";
+        s.style.animationDelay = Math.random() * 2.2 + "s";
+        sparklesHost.appendChild(s);
+      }
+
+      const overlay = document.getElementById("envelope-overlay");
+      const content = document.getElementById("content");
+      const audio = document.getElementById("bg-music");
+      const musicBtn = document.getElementById("music-toggle");
+      audio.volume = 0.45;
+
+      function playMusic() {
+        audio
+          .play()
+          .then(() => musicBtn.classList.add("playing"))
+          .catch(() => {});
+      }
+      document.getElementById("envelope").addEventListener("click", () => {
+        overlay.classList.add("hidden");
+        content.classList.add("revealed");
+        playMusic();
+      });
+      musicBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          playMusic();
+        } else {
+          audio.pause();
+          musicBtn.classList.remove("playing");
+        }
+      });
+
+      const target = new Date("2027-08-28T16:00:00");
+      function tick() {
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        document.getElementById("cd-days").textContent = String(
+          Math.floor(diff / 86400000),
+        ).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(
+          Math.floor((diff % 86400000) / 3600000),
+        ).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(
+          Math.floor((diff % 3600000) / 60000),
+        ).padStart(2, "0");
+        document.getElementById("cd-secs").textContent = String(
+          Math.floor((diff % 60000) / 1000),
+        ).padStart(2, "0");
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

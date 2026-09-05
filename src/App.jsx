@@ -9,9 +9,21 @@ import PricingSection from "./components/PricingSection";
 import Footer from "./components/Footer";
 import { templates, features } from "./data/siteData";
 
+function createFallbackInvitation(eventType, names, tone) {
+  const introductions = {
+    Romántico: `Con mucha ilusión queremos compartir contigo un momento muy especial. Acompáñanos a celebrar ${eventType.toLowerCase()} de ${names}.`,
+    Formal: `Tenemos el honor de invitarte a celebrar ${eventType.toLowerCase()} de ${names}. Será un placer contar con tu presencia en esta ocasión tan especial.`,
+    Divertido: `¡La celebración está por comenzar! Ven a disfrutar con nosotros ${eventType.toLowerCase()} de ${names}.`,
+    Poético: `Entre sueños, alegría y nuevos comienzos, queremos compartir contigo ${eventType.toLowerCase()} de ${names}.`,
+  };
+
+  return introductions[tone];
+}
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("Todas");
+  const [activePackage, setActivePackage] = useState("Todos");
 
   const [aiNames, setAiNames] = useState("");
   const [aiEventType, setAiEventType] = useState("Boda");
@@ -22,11 +34,13 @@ export default function App() {
   const [aiError, setAiError] = useState("");
 
   const categories = ["Todas", "Bodas", "Cumpleaños", "XV Años", "Baby Shower"];
+  const packages = ["Todos", "Básico", "Premium", "A Medida"];
 
-  const filteredTemplates =
-    activeFilter === "Todas"
-      ? templates
-      : templates.filter((template) => template.category === activeFilter);
+  const filteredTemplates = templates.filter(
+    (template) =>
+      (activeFilter === "Todas" || template.category === activeFilter) &&
+      (activePackage === "Todos" || template.package === activePackage),
+  );
 
   const generateInvitationText = async () => {
     if (!aiNames.trim()) {
@@ -41,8 +55,16 @@ export default function App() {
 
     const prompt = `Escribe un texto original, hermoso y con un tono ${aiTone.toLowerCase()} para una invitación de ${aiEventType}. Los anfitriones o festejados son: ${aiNames}. El texto debe ser muy corto (máximo 2 párrafos breves), listo para poner en la portada de una invitación digital web. No incluyas marcadores de posición para fecha o lugar, solo el mensaje introductorio de invitación. No uses comillas al inicio o final.`;
 
-    const apiKey = "";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+
+    if (!apiKey) {
+      setAiResult(
+        createFallbackInvitation(aiEventType, aiNames.trim(), aiTone),
+      );
+      setIsGenerating(false);
+      return;
+    }
 
     const payload = {
       contents: [{ parts: [{ text: prompt }] }],
@@ -67,7 +89,10 @@ export default function App() {
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok) throw new Error("Error de red");
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          throw new Error(errorData?.error?.message || "Error de red");
+        }
 
         const data = await response.json();
         const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -80,9 +105,7 @@ export default function App() {
         }
       } catch (error) {
         if (attempt === retries.length - 1) {
-          setAiError(
-            "Hubo un error al conectar con la magia de la IA. Por favor, intenta de nuevo más tarde.",
-          );
+          setAiError(`No se pudo generar el texto: ${error.message}`);
         } else {
           await new Promise((resolve) => setTimeout(resolve, retries[attempt]));
         }
@@ -124,8 +147,11 @@ export default function App() {
       <TemplatesGallery
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
+        activePackage={activePackage}
+        setActivePackage={setActivePackage}
         filteredTemplates={filteredTemplates}
         categories={categories}
+        packages={packages}
       />
       <FeatureGrid features={features} />
       <InvitationGenerator

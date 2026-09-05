@@ -42,9 +42,15 @@ export default function Header({ isMenuOpen, setIsMenuOpen }) {
             >
               Precios
             </a>
-            <button className="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg shadow-rose-200">
+            <a
+              href="https://www.instagram.com/invito.fun/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Contactar a Invito por Instagram"
+              className="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg shadow-rose-200"
+            >
               Crear Invitación
-            </button>
+            </a>
           </div>
 
           <div className="md:hidden flex items-center">
@@ -100,9 +106,15 @@ export default function Header({ isMenuOpen, setIsMenuOpen }) {
             >
               Precios
             </a>
-            <button className="mt-4 w-full bg-rose-600 text-white px-6 py-3 rounded-full font-medium">
+            <a
+              href="https://www.instagram.com/invito.fun/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Contactar a Invito por Instagram"
+              className="mt-4 w-full bg-rose-600 text-white px-6 py-3 rounded-full font-medium text-center"
+            >
               Crear Invitación
-            </button>
+            </a>
           </div>
         </div>
       )}
